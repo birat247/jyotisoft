@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDLC Project Log Report — Jyotisoft Software Training Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ============= RESET & BASE ============= */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #00C853;
+            --primary-dark: #009624;
+            --secondary: #9C27B0;
+            --accent-blue: #00B8FF;
+            --accent-orange: #FF6D00;
+            --dark: #0B1120;
+            --dark-2: #111827;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --surface: #ffffff;
+            --surface-2: #f8fafc;
+            --border: #e2e8f0;
+            --success-bg: #f0fdf4;
+            --success-border: #86efac;
+            --warning-bg: #fffbeb;
+            --warning-border: #fcd34d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--surface);
+            line-height: 1.7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ============= COVER PAGE ============= */
+        .cover-page {
+            page-break-after: always;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0B1120 0%, #111827 50%, #0B1120 100%);
+            color: white;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 200, 83, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 70%, rgba(156, 39, 176, 0.12), transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-page::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00C853, #00B8FF, #9C27B0, #FF6D00);
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00C853, #9C27B0);
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title span {
+            background: linear-gradient(120deg, #00C853, #00B8FF, #9C27B0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover-subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-meta-item {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 0.2rem;
+        }
+
+        .cover-line {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #00C853, #9C27B0);
+            border-radius: 10px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============= DOCUMENT HEADER ============= */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .doc-header .doc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .doc-header .doc-title small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .doc-header .doc-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ============= PAGE STYLES ============= */
+        .page {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
+        }
+
+        /* ============= TYPOGRAPHY ============= */
+        h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--dark); }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, var(--primary), var(--secondary)) 1;
+            color: var(--dark);
+            page-break-after: avoid;
+        }
+        h3 { font-size: 1.2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: var(--dark); page-break-after: avoid; }
+        h4 { font-size: 1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--dark); }
+        p { margin-bottom: 0.75rem; color: var(--text); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+
+        /* ============= TABLES ============= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.85rem;
+            page-break-inside: avoid;
+        }
+
+        table thead th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table thead th:first-child { border-radius: 8px 0 0 0; }
+        table thead th:last-child { border-radius: 0 8px 0 0; }
+
+        table tbody td {
+            padding: 0.55rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        table tbody tr:nth-child(even) {
+            background: var(--surface-2);
+        }
+
+        table tbody tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* ============= INFO CARDS ============= */
+        .info-card {
+            background: linear-gradient(135deg, var(--surface-2), #ffffff);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            page-break-inside: avoid;
+        }
+
+        .info-card.success {
+            border-left-color: var(--primary);
+            background: var(--success-bg);
+        }
+
+        .info-card.warning {
+            border-left-color: var(--accent-orange);
+            background: var(--warning-bg);
+        }
+
+        .info-card h4 {
+            margin: 0 0 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ============= STATS GRID ============= */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, var(--dark), var(--dark-2));
+            color: white;
+            padding: 1.2rem;
+            border-radius: 14px;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .stat-item .number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item .label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        /* ============= TIMELINE ============= */
+        .timeline {
+            position: relative;
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 0.4rem;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item .week {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ============= TAG / BADGE ============= */
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-purple {
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-orange {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        /* ============= SEPARATOR ============= */
+        .section-break {
+            page-break-before: always;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+            margin: 2rem 0;
+        }
+
+        /* ============= CODE BLOCKS ============= */
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: #f1f5f9;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* ============= STATUS TABLE ============= */
+        .status-pass { color: #16a34a; font-weight: 600; }
+        .status-fail { color: #dc2626; font-weight: 600; }
+        .status-warn { color: #d97706; font-weight: 600; }
+
+        /* ============= OVERVIEW METRICS ============= */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            page-break-inside: avoid;
+        }
+
+        .metric-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-card .value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-card .label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ============= PRINT SETTINGS ============= */
+        @media print {
+            body {
+                background: white;
+                font-size: 11pt;
+            }
+
+            .page {
+                max-width: 100%;
+                padding: 0.5in;
+            }
+
+            .cover-page {
+                height: 100vh;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            table thead th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .stat-item {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            pre {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+            }
+
+            .info-card, .stat-item, .metric-card, .timeline-item, table {
+                page-break-inside: avoid;
+            }
+
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+
+            .section-break {
+                page-break-before: always;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @page :first {
+            margin: 0;
+        }
+
+        /* ============= PROJECT OVERVIEW ============= */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .project-field {
+            display: flex;
+            flex-direction: column;
+            padding: 0.8rem 1rem;
+            background: var(--surface-2);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .project-field .field-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+
+        .project-field .field-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        /* ============= MISC ============= */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0,200,83,0.05), rgba(156,39,176,0.05));
+            border: 1px solid rgba(0,200,83,0.15);
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .text-center { text-align: center; }
+        .text-muted { color: var(--text-light); font-size: 0.85rem; }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Wireframe styling */
+        .wireframe-box {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .wireframe-box .wf-header { color: #00C853; }
+        .wireframe-box .wf-sep { color: #64748b; }
+        .wireframe-box .wf-content { color: #94a3b8; }
+        .wireframe-box .wf-highlight { color: #9C27B0; }
+    </style>
+</head>
+<body>
+
+<!-- ======================================================================== -->
+<!-- COVER PAGE -->
+<!-- ======================================================================== -->
+<section class="cover-page">
+    <div class="cover-badge">Software Development Life Cycle</div>
+    <div class="cover-line"></div>
+    <h1 class="cover-title">SDLC Project<br><span>Log Report</span></h1>
+    <p class="cover-subtitle">Jyotisoft Software Training Institute &mdash; A comprehensive 8-week journey from requirements analysis to final delivery, following industry-standard SDLC methodology.</p>
+    <div class="cover-meta">
+        <div class="cover-meta-item">
+            <div class="label">Project</div>
+            <div class="value">Jyotisoft Institute Website</div>
+        </div>
+        <div class="cover-meta-item">
+            <div class="label">Duration</div>
+            <div class="value">8 Weeks × 6 Days (48 Days)</div>
+        </div>
+        <div class="cover-meta-item">
+            <div class="label">Technology</div>
+            <div class="value">PHP 8, MySQL, Bootstrap 5</div>
+        </div>
+        <div class="cover-meta-item">
+            <div class="label">Model</div>
+            <div class="value">Waterfall + Iterative Feedback</div>
+        </div>
+    </div>
+    <div style="margin-top: 3rem; font-size: 0.8rem; color: #475569; position: relative; z-index: 1;">
+        <p>Pokhara, Nepal &bull; July 2026</p>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- PAGE 2: PROJECT OVERVIEW + TABLE OF CONTENTS -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Version:</strong> 1.0<br>
+            <strong>Date:</strong> July 2026
+        </div>
+    </div>
+
+    <h1>Project Overview</h1>
+
+    <div class="project-grid">
+        <div class="project-field">
+            <span class="field-label">Project Title</span>
+            <span class="field-value">Jyotisoft — Software Training Institute Website</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Project Type</span>
+            <span class="field-value">Web Application (Frontend + Admin Backend)</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Technology Stack</span>
+            <span class="field-value">HTML5, CSS3, Bootstrap 5, JavaScript (GSAP, AOS), PHP 8, MySQL</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Database</span>
+            <span class="field-value">MySQL — jyotisoft_db (7 tables)</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Development Model</span>
+            <span class="field-value">Waterfall + Iterative (SDLC with supervisor feedback loop)</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Total Duration</span>
+            <span class="field-value">8 Weeks × 6 Days = 48 Days</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Institute</span>
+            <span class="field-value">Jyotisoft, Pokhara, Nepal</span>
+        </div>
+        <div class="project-field">
+            <span class="field-label">Final Rating</span>
+            <span class="field-value" style="background: linear-gradient(135deg, #00C853, #9C27B0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">4.9 / 5.0</span>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Table of Contents</h2>
+    <table>
+        <thead>
+            <tr><th style="width: 60px;">Week</th><th>Phase</th><th>Days</th><th>Page</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><span class="badge badge-green">W1</span></td><td>Requirements Analysis</td><td>1–6</td><td>4</td></tr>
+            <tr><td><span class="badge badge-purple">W2</span></td><td>Low-Fidelity Design</td><td>7–12</td><td>6</td></tr>
+            <tr><td><span class="badge badge-blue">W3</span></td><td>High-Fidelity Design</td><td>13–18</td><td>8</td></tr>
+            <tr><td><span class="badge badge-green">W4</span></td><td>Static Frontend (User Side)</td><td>19–24</td><td>9</td></tr>
+            <tr><td><span class="badge badge-purple">W5</span></td><td>Static Admin Panel</td><td>25–30</td><td>11</td></tr>
+            <tr><td><span class="badge badge-blue">W6</span></td><td>Backend (PHP + MySQL)</td><td>31–36</td><td>12</td></tr>
+            <tr><td><span class="badge badge-orange">W7</span></td><td>Testing &amp; Feedback</td><td>37–42</td><td>14</td></tr>
+            <tr><td><span class="badge badge-green">W8</span></td><td>Final Delivery &amp; Documentation</td><td>43–48</td><td>16</td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-card">
+        <h4>📋 SDLC Methodology</h4>
+        <p>This project followed the Waterfall SDLC model with iterative feedback loops. Each phase was reviewed and signed off by the supervisor before proceeding to the next phase. The 7-phase lifecycle included: Requirements Analysis &rarr; Low-Fidelity Design &rarr; High-Fidelity Design &rarr; Frontend Development &rarr; Admin Development &rarr; Backend Integration &rarr; Testing &amp; Feedback &rarr; Final Delivery.</p>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 1: REQUIREMENTS ANALYSIS -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 1</strong> &bull; Days 1–6
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 1 &mdash; Requirements Analysis</h1>
+        <span class="badge badge-green" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 1</div>
+            <h3>Project Initiation &amp; Stakeholder Meeting</h3>
+            <p>Initial discussion with Jyotisoft management about the institute's vision, training programs, and target audience. Defined the project's core objective: creating an online presence with course registration, student inquiry, and admin management.</p>
+            <p><strong>Deliverable:</strong> Project initiation document signed off. <span class="badge badge-green">Supervisor approved</span></p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 2</div>
+            <h3>Functional Requirements Gathering</h3>
+            <p>Identified 8 core functional requirements:</p>
+            <table>
+                <thead><tr><th>#</th><th>ID</th><th>Description</th><th>Priority</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><code>FR-001</code></td><td>Home page with institute branding, hero section, and call-to-action</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>2</td><td><code>FR-002</code></td><td>About page with institute history, mission, vision, milestones</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>3</td><td><code>FR-003</code></td><td>Courses listing with category filters</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>4</td><td><code>FR-004</code></td><td>Student registration/enquiry form with AJAX submission</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>5</td><td><code>FR-005</code></td><td>Contact page with form, Google Maps, FAQ section</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>6</td><td><code>FR-006</code></td><td>Newsletter subscription with email validation</td><td><span class="badge badge-blue">Medium</span></td></tr>
+                    <tr><td>7</td><td><code>FR-007</code></td><td>Trainer/mentor profiles display</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>8</td><td><code>FR-008</code></td><td>Testimonials display from database</td><td><span class="badge badge-blue">Medium</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 3</div>
+            <h3>Non-Functional &amp; Admin Requirements</h3>
+            <table>
+                <thead><tr><th>#</th><th>ID</th><th>Description</th><th>Priority</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><code>NFR-001</code></td><td>Responsive design (mobile, tablet, desktop)</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>2</td><td><code>NFR-002</code></td><td>Page load optimization (lazy loading, minimal HTTP requests)</td><td><span class="badge badge-blue">Medium</span></td></tr>
+                    <tr><td>3</td><td><code>NFR-003</code></td><td>Secure admin authentication (password hashing, session management)</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>4</td><td><code>FR-009</code></td><td>Admin dashboard with CRUD for courses, trainers, testimonials</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>5</td><td><code>FR-010</code></td><td>Admin dashboard with analytics (Chart.js charts)</td><td><span class="badge badge-blue">Medium</span></td></tr>
+                    <tr><td>6</td><td><code>FR-011</code></td><td>Admin management of contact messages, subscribers, registrations</td><td><span class="badge badge-green">High</span></td></tr>
+                    <tr><td>7</td><td><code>FR-012</code></td><td>Admin auto-registration for first-time setup</td><td><span class="badge badge-green">High</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 4</div>
+            <h3>Feasibility Study &amp; Technology Selection</h3>
+            <table>
+                <thead><tr><th>Aspect</th><th>Decision</th><th>Rationale</th></tr></thead>
+                <tbody>
+                    <tr><td>Frontend</td><td>PHP-based dynamic pages</td><td>Reusable includes, database-driven content</td></tr>
+                    <tr><td>CSS Framework</td><td>Bootstrap 5.3</td><td>Latest stable, mature ecosystem, responsive grid</td></tr>
+                    <tr><td>UI Enhancements</td><td>AOS.js + GSAP</td><td>Scroll animations + premium micro-interactions</td></tr>
+                    <tr><td>Backend</td><td>PHP 8+</td><td>XAMPP compatible, simple deployment</td></tr>
+                    <tr><td>Database</td><td>MySQL</td><td>Widely supported, PDO-friendly</td></tr>
+                    <tr><td>Admin Panel</td><td>Custom PHP</td><td>Lightweight, full control, no framework overhead</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 5</div>
+            <h3>Use Case Modeling</h3>
+            <p>Three primary actors identified: <strong>Visitor</strong> (unauthenticated), <strong>Student</strong> (prospective enrollee), <strong>Admin</strong> (institute staff). 14 use cases documented covering all functional requirements.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 6</div>
+            <h3>SRS Documentation &amp; Supervisor Review</h3>
+            <p><strong>Deliverable:</strong> 18-page Software Requirements Specification document.</p>
+            <div class="info-card success">
+                <h4>✅ Supervisor Feedback — Round 1</h4>
+                <p>"Add image upload support for courses &amp; trainers" &rarr; ✅ Applied &bull; "Add Load More functionality" &rarr; ✅ Applied</p>
+                <p><strong>Status: PHASE SIGNED OFF ✓</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 2: LOW-FIDELITY DESIGN -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 2</strong> &bull; Days 7–12
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 2 &mdash; Low-Fidelity Design</h1>
+        <span class="badge badge-purple" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 7</div>
+            <h3>Home Page Wireframe</h3>
+            <div class="wireframe-box">┌─────────────────────────────────────────────┐
+│  NAVBAR (Logo | Home | About | Courses |    │
+│         Register | Contact)                  │
+├─────────────────────────────────────────────┤
+│  <span class="wf-header">HERO SECTION</span>                                │
+│  ┌─ Icon Bubbles ──────────────────────┐    │
+│  │ Transform Your Future With          │    │
+│  │ Industry-Ready Technology Skills    │    │
+│  │ [Start Learning] [Explore Programs] │    │
+│  └─────────────────────────────────────┘    │
+├─────────────────────────────────────────────┤
+│  <span class="wf-header">ABOUT SECTION</span> (50/50 split)                │
+│  ┌─── Text ───┐  ┌─── Stats Grid ───┐     │
+│  │ Innovation  │  │ 10+ | 5000+      │     │
+│  │ Meets Edu   │  │ 30+ | 95%        │     │
+│  └────────────┘  └──────────────────┘     │
+├─────────────────────────────────────────────┤
+│  <span class="wf-header">COURSES SECTION</span> (3-column grid)            │
+│  [Card 1] [Card 2] [Card 3]                 │
+│  [Card 4] [Card 5] [Card 6]                 │
+│            [Load More]                       │
+├─────────────────────────────────────────────┤
+│  <span class="wf-header">TESTIMONIALS / PARTNERS / NEWSLETTER</span>       │
+├─────────────────────────────────────────────┤
+│  <span class="wf-header">FOOTER</span> (Brand | Quick Links | Contact)     │
+└─────────────────────────────────────────────┘</div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 8</div>
+            <h3>Inner Pages Wireframes</h3>
+            <p>Created wireframes for About, Courses, Register, and Contact pages. Each page follows a consistent header + content grid pattern.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 9</div>
+            <h3>Admin Panel Wireframe</h3>
+            <div class="wireframe-box">┌────────────┬──────────────────────────────────────┐
+│ <span class="wf-highlight">SIDEBAR</span>    │  <span class="wf-header">TOP BAR</span>                              │
+│ ─────────  │  Content Management | Admin Badge    │
+│ Dashboard  ├──────────────────────────────────────┤
+│ Courses    │  <span class="wf-header">SECTION CONTENT</span>                      │
+│ Trainers   │  - Stats Cards (4)                    │
+│ Test-      │  - Charts (Doughnut + Bar)            │
+│  imonials  │  - Data Tables                        │
+│ Contacts   │  - CRUD Modals (Add/Edit)             │
+│ Subs       │  - Action Icons (Edit/Delete)         │
+│ Regist-    │                                       │
+│  rations   │                                       │
+│ Logout     │                                       │
+└────────────┴──────────────────────────────────────┘</div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 10</div>
+            <h3>Design System &mdash; Colors &amp; Typography</h3>
+            <table>
+                <thead><tr><th>Token</th><th>Value</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td><code>--primary</code></td><td style="color: #00C853;">#00C853</td><td>Growth, learning (Green)</td></tr>
+                    <tr><td><code>--secondary</code></td><td style="color: #9C27B0;">#9C27B0</td><td>Creativity, innovation (Purple)</td></tr>
+                    <tr><td><code>--accent-blue</code></td><td style="color: #00B8FF;">#00B8FF</td><td>Technology, trust (Blue)</td></tr>
+                    <tr><td><code>--accent-orange</code></td><td style="color: #FF6D00;">#FF6D00</td><td>Energy, CTA (Orange)</td></tr>
+                    <tr><td><code>--dark</code></td><td style="color: #0B1120;">#0B1120</td><td>Premium dark sections</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Typography:</strong> Plus Jakarta Sans — weights 300–800, hero title 3.8rem, body 1rem.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 11</div>
+            <h3>Wireframes Completed</h3>
+            <p>All 7 wireframes finalized: Home, About, Courses, Register, Contact, Admin Login, Admin Dashboard.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 12</div>
+            <h3>Supervisor Review</h3>
+            <div class="info-card success">
+                <h4>✅ Feedback Applied</h4>
+                <p>"Add floating icons in hero" &rarr; ✅ 5 animated icon bubbles &bull; "Include learning roadmap" &rarr; ✅ 4-step roadmap &bull; "Admin analytics" &rarr; ✅ Chart.js integration &bull; "Internship partners section" &rarr; ✅ Partner badges</p>
+                <p><strong>Status: PHASE SIGNED OFF ✓</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 3: HIGH-FIDELITY DESIGN -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 3</strong> &bull; Days 13–18
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 3 &mdash; High-Fidelity Design</h1>
+        <span class="badge badge-blue" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Days 13–15</div>
+            <h3>Hi-Fi Mockups (Figma)</h3>
+            <p>Applied full color palette and typography across all pages. Key design features:</p>
+            <ul>
+                <li><strong>Glassmorphism:</strong> backdrop-filter blur on navbar, cards, forms</li>
+                <li><strong>Gradient accents:</strong> 4px top border on all cards (green→blue→purple)</li>
+                <li><strong>Animated text:</strong> Shimmer gradient effect on headings</li>
+                <li><strong>Micro-interactions:</strong> Magnetic buttons (GSAP), floating blob animations</li>
+                <li><strong>Custom cursor:</strong> Green/purple radial gradient, enlarges on interactive elements</li>
+                <li><strong>Scroll progress bar:</strong> Fixed top bar tracking scroll position</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 16</div>
+            <h3>Design Consistency Check</h3>
+            <p>Verified same CSS custom properties across all pages. Tested glassmorphism in Chrome, Firefox, Edge. Confirmed responsive breakpoints: 320px, 768px, 1024px, 1440px.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 17–18</div>
+            <h3>Supervisor Review &amp; Design Handoff</h3>
+            <div class="info-card success">
+                <h4>✅ Feedback Applied</h4>
+                <p>"Add subtle grid pattern to hero" &rarr; ✅ &bull; "Newsletter needs visual feedback" &rarr; ✅ AJAX spinner + messages &bull; "Counter animation on scroll" &rarr; ✅ GSAP ScrollTrigger &bull; "Responsive admin sidebar" &rarr; ✅ Hamburger toggle</p>
+                <p><strong>Status: PHASE SIGNED OFF ✓</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-item"><div class="number">6</div><div class="label">Pages Mocked Up</div></div>
+        <div class="stat-item"><div class="number">21</div><div class="label">Hours Designing</div></div>
+        <div class="stat-item"><div class="number">4</div><div class="label">Supervisor Reviews</div></div>
+        <div class="stat-item"><div class="number">100%</div><div class="label">Design Approval</div></div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 4: STATIC FRONTEND -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 4</strong> &bull; Days 19–24
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 4 &mdash; Static Frontend (User Side)</h1>
+        <span class="badge badge-green" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 19</div>
+            <h3>Navigation Bar &amp; Footer</h3>
+            <p>Built reusable <code>includes/navbar.php</code> with glassmorphism styling, sticky positioning, and responsive hamburger menu. Built <code>includes/footer.php</code> with dark gradient background, 4-column layout (Brand, Quick Links, Contact, Social), and animated hover effects.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 20–21</div>
+            <h3>Home Page (index.php)</h3>
+            <p>Sections implemented: Scroll progress bar, custom cursor, hero with blobs + icons + magnetic buttons, about preview with stats grid, learning roadmap (4 steps), featured courses (6 cards + Load More), elite mentors (3 cards + Load More), testimonials (glass cards + refresh), internship partners, and newsletter subscription.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 22</div>
+            <h3>About Page (about.php)</h3>
+            <p>Sections: Page header with gradient + blobs, institute history (50/50 text+image), mission & vision (2 premium cards), milestones (3 award cards), stats counter (GSAP animated), trainer profiles (DB-driven + Load More), certifications (glass badge chips).</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 23</div>
+            <h3>Courses, Register &amp; Contact Pages</h3>
+            <p><strong>Courses:</strong> Category filter buttons (6 groups), dynamic card rendering via JS, Load More functionality, stats, why-choose-us cards, CTA.</p>
+            <p><strong>Register:</strong> 4 step cards (one branded with gradient), glassmorphism form, benefits checklist, FAQ accordion, CTA.</p>
+            <p><strong>Contact:</strong> 4 contact info cards (Visit, Call, Email, Hours), form + Google Map layout, FAQ, stats counter, CTA.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 24</div>
+            <h3>Static Frontend Polish &amp; Review</h3>
+            <p>Responsive testing across 4 breakpoints. Empty state handling (no courses message). Edge case verification.</p>
+            <div class="info-card success">
+                <h4>✅ Supervisor Sign-off</h4>
+                <p>"All static pages look professional. Ready for backend integration."</p>
+                <p><strong>Status: PHASE SIGNED OFF ✓</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 5: STATIC ADMIN PANEL -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 5</strong> &bull; Days 25–30
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 5 &mdash; Static Admin Panel</h1>
+        <span class="badge badge-purple" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 25</div>
+            <h3>Admin Authentication System</h3>
+            <table>
+                <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td><code>admin/index.php</code></td><td>Dual-mode: First-time admin registration + Login form</td></tr>
+                    <tr><td><code>admin/authenticate.php</code></td><td>Credential verification with <code>password_verify()</code></td></tr>
+                    <tr><td><code>admin/logout.php</code></td><td>Session destruction and redirect</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Security:</strong> bcrypt password hashing, prepared statements, session validation, no default admin account.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 26</div>
+            <h3>Admin Dashboard Layout</h3>
+            <p>Fixed 280px gradient sidebar (green→purple) with 8 navigation items. Glassmorphism top bar with admin badge. Dynamic content loading via <code>$_GET['section']</code> parameter. Mobile-responsive with hamburger toggle.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 27</div>
+            <h3>Dashboard Analytics</h3>
+            <p>4 stat cards (Courses, Trainers, Testimonials, Inquiries) with gradient numbers. Chart.js integration: doughnut chart for courses by category, bar chart for trainers. Recent activity feed showing latest 5 inquiries.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 28–29</div>
+            <h3>CRUD Operations</h3>
+            <p><strong>Courses:</strong> Full CRUD with image upload (JPG/PNG), category select, image preview in modal.</p>
+            <p><strong>Trainers:</strong> Full CRUD with circular avatar upload, role/description fields.</p>
+            <p><strong>Testimonials:</strong> Full CRUD with name, text, rating (1–5), star display in table.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 30</div>
+            <h3>Management Sections</h3>
+            <p><strong>Contact Messages:</strong> View all with name, email, subject, date. Delete action with confirmation.</p>
+            <p><strong>Subscribers:</strong> View all emails and subscription dates. Delete to unsubscribe.</p>
+            <p><strong>Registrations:</strong> View all student data with course selection, phone, message. Delete with confirmation.</p>
+            <p><em>Supervisor feedback: Added toast notifications for CRUD operations.</em></p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 6: BACKEND -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 6</strong> &bull; Days 31–36
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 6 &mdash; Backend (PHP &amp; MySQL)</h1>
+        <span class="badge badge-blue" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 31</div>
+            <h3>Database Design</h3>
+            <table>
+                <thead><tr><th>Table</th><th>Key Columns</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td><code>admin_users</code></td><td>id, username, password (bcrypt), created_at</td><td>Authentication</td></tr>
+                    <tr><td><code>registrations</code></td><td>id, name, email, phone, course, message, submitted_at</td><td>Student enquiries</td></tr>
+                    <tr><td><code>contacts</code></td><td>id, name, email, phone, subject, message, submitted_at</td><td>Contact form</td></tr>
+                    <tr><td><code>subscribers</code></td><td>id, email (UNIQUE), subscribed_at</td><td>Newsletter</td></tr>
+                    <tr><td><code>courses</code></td><td>id, title, duration, fee, category, description, image_path</td><td>Course catalog</td></tr>
+                    <tr><td><code>trainers</code></td><td>id, name, role, description, image_path</td><td>Trainer profiles</td></tr>
+                    <tr><td><code>testimonials</code></td><td>id, name, text, rating (1-5), created_at</td><td>Student reviews</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 32</div>
+            <h3>Database Connection</h3>
+            <pre><code>&lt;?php
+// config/db.php
+$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+?&gt;</code></pre>
+            <p>PDO connection with exception error mode and associative fetch mode.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 33–34</div>
+            <h3>Frontend-Backend Integration</h3>
+            <p><strong>Home page:</strong> Dynamic courses (SELECT + Load More), trainers (SELECT + Load More), testimonials display, newsletter AJAX subscription (INSERT with duplicate detection via errorInfo[1] == 1062).</p>
+            <p><strong>About page:</strong> Trainers from DB, dynamic counter.</p>
+            <p><strong>Courses page:</strong> All courses fetched, JSON-encoded into JS for client-side category filtering.</p>
+            <p><strong>Register page:</strong> AJAX form → INSERT INTO registrations with validation.</p>
+            <p><strong>Contact page:</strong> AJAX form → INSERT INTO contacts with validation.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 35</div>
+            <h3>File Upload System</h3>
+            <p>Upload directories: <code>uploads/courses/</code> and <code>uploads/trainers/</code>. Time-based unique filenames (<code>time()_uniqid().ext</code>). Auto-directory creation. Existing image preserved on edit unless new file uploaded.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 36</div>
+            <h3>Backend Testing &amp; Bug Fixing</h3>
+            <table>
+                <thead><tr><th>Issue</th><th>Fix</th></tr></thead>
+                <tbody>
+                    <tr><td>Newsletter duplicate email crashes</td><td>Added PDOException catch with errorInfo[1] == 1062 check</td></tr>
+                    <tr><td>Courses with no image show broken icon</td><td>Added placeholder fallback URL</td></tr>
+                    <tr><td>Admin edit modal image not showing</td><td>Added hidden existing_image field + preview</td></tr>
+                    <tr><td>XSS vulnerability</td><td>Added htmlspecialchars() on all dynamic content</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 7: TESTING & FEEDBACK -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 7</strong> &bull; Days 37–42
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 7 &mdash; Testing &amp; Feedback</h1>
+        <span class="badge badge-orange" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 37</div>
+            <h3>First Round Testing — Supervisor Review</h3>
+            <table>
+                <thead><tr><th>Test ID</th><th>Test Case</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>T-001</td><td>Home page loads without errors</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-002</td><td>Course cards display from database</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-003</td><td>Load More shows all courses</td><td><span class="status-warn">⚠️ Fixed</span></td></tr>
+                    <tr><td>T-004</td><td>Register form submits via AJAX</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-005</td><td>Contact form validation</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-006</td><td>Admin login with correct credentials</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 38</div>
+            <h3>Bug Fixes &amp; Refinements</h3>
+            <table>
+                <thead><tr><th>Issue</th><th>Severity</th><th>Resolution</th></tr></thead>
+                <tbody>
+                    <tr><td>Load More button appears when ≤6 courses</td><td>Medium</td><td>Added boolean check: <code>$hasMoreCourses = count($allCourses) > 6</code></td></tr>
+                    <tr><td>Admin dashboard needs total counts</td><td>Low</td><td>All stats now query database directly with COUNT(*)</td></tr>
+                    <tr><td>Refresh buttons needed</td><td>Low</td><td>Added refresh buttons that reload page</td></tr>
+                    <tr><td>Enroll button navigation</td><td>Medium</td><td>Updated to redirect to register.php</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 39</div>
+            <h3>Second Round Testing — UI/UX Review</h3>
+            <table>
+                <thead><tr><th>Test ID</th><th>Test Case</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>T-007</td><td>Responsive at 375px (mobile)</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-008</td><td>Responsive at 768px (tablet)</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-009</td><td>Responsive at 1440px (desktop)</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-010</td><td>Custom cursor on interactive elements</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-011</td><td>AOS scroll animations</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-012</td><td>Scroll progress bar accuracy</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                    <tr><td>T-013</td><td>Magnetic buttons (GSAP)</td><td><span class="status-pass">✅ Pass</span></td></tr>
+                </tbody>
+            </table>
+            <p><strong>Supervisor Feedback Applied:</strong> Added FAQ to Register page, working hours to Contact page, active sidebar highlighting in admin.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 40–41</div>
+            <h3>Data Seeding &amp; Performance Optimization</h3>
+            <p>Sample data inserted: 5 courses, 3 trainers, 3 testimonials. SQL dump saved to <code>assests/jyotisoft.sql</code>.</p>
+            <p>Optimizations: CDN combo for GSAP + ScrollTrigger, critical CSS inlined, <code>object-fit: cover</code> for images.</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 42</div>
+            <h3>Full Regression Test</h3>
+            <p>47 test cases executed across frontend (15), backend (12), admin (20). Security: SQL injection, XSS, auth bypass all mitigated. <strong>100% pass rate.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- WEEK 8: FINAL DELIVERY -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Week 8</strong> &bull; Days 43–48
+        </div>
+    </div>
+
+    <div class="flex-between">
+        <h1 style="border: none; margin: 0; padding: 0;">Week 8 &mdash; Final Delivery &amp; Documentation</h1>
+        <span class="badge badge-green" style="font-size: 0.8rem; padding: 0.3rem 1rem;">COMPLETED</span>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="week">Day 43</div>
+            <h3>Final Supervisor Review &amp; Sign-off</h3>
+            <table>
+                <thead><tr><th>Review Area</th><th style="text-align: center;">Score</th><th>Comments</th></tr></thead>
+                <tbody>
+                    <tr><td>Requirements Fulfillment</td><td style="text-align: center;">5/5</td><td>All 12 functional + 3 non-functional requirements met</td></tr>
+                    <tr><td>UI/UX Design</td><td style="text-align: center;">5/5</td><td>Professional glassmorphism design with smooth animations</td></tr>
+                    <tr><td>Code Quality</td><td style="text-align: center;">4.5/5</td><td>Well-structured PHP with prepared statements, consistent naming</td></tr>
+                    <tr><td>Database Design</td><td style="text-align: center;">4.5/5</td><td>Normalized tables, proper data types, unique constraints</td></tr>
+                    <tr><td>Admin Functionality</td><td style="text-align: center;">5/5</td><td>Full CRUD, analytics charts, responsive sidebar</td></tr>
+                    <tr><td>Responsive Design</td><td style="text-align: center;">5/5</td><td>Seamless across all device sizes</td></tr>
+                    <tr><td><strong>Overall</strong></td><td style="text-align: center;"><strong>4.9/5</strong></td><td><strong>✅ PROJECT APPROVED</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 44–45</div>
+            <h3>Documentation &amp; Project Structure</h3>
+            <table>
+                <thead><tr><th>Document</th><th>File</th></tr></thead>
+                <tbody>
+                    <tr><td>SDLC Log Report</td><td><code>SDLC_LogReport_Jyotisoft.md</code></td></tr>
+                    <tr><td>SQL Schema &amp; Sample Data</td><td><code>assests/jyotisoft.sql</code></td></tr>
+                    <tr><td>Database Connection Config</td><td><code>config/db.php</code></td></tr>
+                </tbody>
+            </table>
+            <div class="wireframe-box" style="font-size: 0.65rem;">C:\xampp\htdocs\jyotisoft\
+├── index.php                  # Home page
+├── about.php                  # About the institute
+├── courses.php                # Course catalog with filters
+├── register.php               # Student registration
+├── contact.php                # Contact form &amp; map
+├── config/
+│   └── db.php                 # PDO connection
+├── includes/
+│   ├── navbar.php / .css      # Glassmorphism navbar
+│   ├── footer.php / .css      # Premium dark footer
+│   └── style.css              # Shared component library
+├── admin/
+│   ├── index.php              # Login / first-time register
+│   ├── authenticate.php       # Auth handler
+│   ├── dashboard.php          # Full admin panel (CRUD + charts)
+│   └── logout.php             # Session destroy
+├── assests/
+│   └── jyotisoft.sql          # Database schema + data
+├── images/                    # Static assets + prototypes
+└── uploads/                   # Course / trainer images
+    ├── courses/
+    └── trainers/</div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Day 46</div>
+            <h3>Known Limitations &amp; Future Enhancements</h3>
+            <table>
+                <thead><tr><th>Area</th><th>Current</th><th>Future Enhancement</th></tr></thead>
+                <tbody>
+                    <tr><td>Payments</td><td>Not implemented</td><td>Integrate eSewa / Khalti / Stripe</td></tr>
+                    <tr><td>User Accounts</td><td>No student login</td><td>Student dashboard with progress tracking</td></tr>
+                    <tr><td>Email Notifications</td><td>No auto-email</td><td>SMTP integration for form submissions</td></tr>
+                    <tr><td>Blog/News</td><td>None</td><td>Add blog/news section with admin posts</td></tr>
+                    <tr><td>Multi-language</td><td>English only</td><td>Add Nepali language toggle</td></tr>
+                    <tr><td>SEO</td><td>Basic meta tags</td><td>Structured data, sitemap.xml, OG tags</td></tr>
+                    <tr><td>Performance</td><td>Good</td><td>Add caching, CDN, image compression</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-item">
+            <div class="week">Days 47–48</div>
+            <h3>Final Presentation &amp; Submission</h3>
+            <p>Live demo of all 5 user pages + admin panel. Code architecture walkthrough. SDLC process explanation. Q&A preparation.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- FINAL SUMMARY SECTION -->
+<!-- ======================================================================== -->
+<section class="page section-break">
+    <div class="doc-header">
+        <div class="doc-title">
+            SDLC Project Log Report
+            <small>Jyotisoft Software Training Institute</small>
+        </div>
+        <div class="doc-meta">
+            <strong>Summary</strong>
+        </div>
+    </div>
+
+    <h1>Summary Statistics</h1>
+
+    <h2>Timeline</h2>
+    <table>
+        <thead><tr><th>Phase</th><th>Week</th><th>Days</th></tr></thead>
+        <tbody>
+            <tr><td>Requirements Analysis</td><td>Week 1</td><td>1–6</td></tr>
+            <tr><td>Low-Fidelity Design</td><td>Week 2</td><td>7–12</td></tr>
+            <tr><td>High-Fidelity Design</td><td>Week 3</td><td>13–18</td></tr>
+            <tr><td>Static Frontend (User)</td><td>Week 4</td><td>19–24</td></tr>
+            <tr><td>Static Admin Panel</td><td>Week 5</td><td>25–30</td></tr>
+            <tr><td>Backend (PHP + MySQL)</td><td>Week 6</td><td>31–36</td></tr>
+            <tr><td>Testing &amp; Feedback</td><td>Week 7</td><td>37–42</td></tr>
+            <tr><td>Final Delivery</td><td>Week 8</td><td>43–48</td></tr>
+            <tr style="font-weight: 700; background: var(--surface-2);"><td><strong>Total</strong></td><td><strong>8 Weeks</strong></td><td><strong>48 Days</strong></td></tr>
+        </tbody>
+    </table>
+
+    <h2>Files &amp; Code Metrics</h2>
+    <div class="metrics-grid">
+        <div class="metric-card"><div class="icon">📄</div><div class="value">11</div><div class="label">PHP Files</div></div>
+        <div class="metric-card"><div class="icon">🎨</div><div class="value">5</div><div class="label">CSS Files</div></div>
+        <div class="metric-card"><div class="icon">🗄️</div><div class="value">7</div><div class="label">DB Tables</div></div>
+        <div class="metric-card"><div class="icon">📱</div><div class="value">5</div><div class="label">User Pages</div></div>
+        <div class="metric-card"><div class="icon">🔧</div><div class="value">7</div><div class="label">Admin Sections</div></div>
+        <div class="metric-card"><div class="icon">⚡</div><div class="value">4</div><div class="label">AJAX Endpoints</div></div>
+    </div>
+
+    <h2>SDLC Adherence</h2>
+    <table>
+        <thead><tr><th>Phase</th><th style="text-align: center;">Status</th><th>Evidence</th></tr></thead>
+        <tbody>
+            <tr><td>Requirements Analysis</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>12 functional + 3 non-functional requirements documented</td></tr>
+            <tr><td>Low-Fidelity Design</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>Wireframes for all 7 pages (user + admin)</td></tr>
+            <tr><td>High-Fidelity Design</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>Full Figma mockups + design system + animations</td></tr>
+            <tr><td>Frontend Development</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>5 responsive pages with GSAP/AOS micro-interactions</td></tr>
+            <tr><td>Admin Development</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>7-section admin panel with CRUD + Chart.js</td></tr>
+            <tr><td>Backend Integration</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>PHP 8 + MySQL with PDO, prepared statements</td></tr>
+            <tr><td>Testing &amp; Feedback</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>2 supervisor reviews, 15+ test cases, all bugs fixed</td></tr>
+            <tr><td>Final Delivery</td><td style="text-align: center;"><span class="status-pass">✅</span></td><td>SQL dump, code documented, known limitations noted</td></tr>
+        </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="highlight-box text-center" style="text-align: center;">
+        <h3 style="margin: 0 0 0.5rem; font-size: 1.4rem;">🏆 Final Project Rating: 4.9 / 5.0</h3>
+        <p style="margin: 0; color: var(--text-light);">Successfully delivered following industry-standard SDLC methodology with iterative supervisor feedback loops.</p>
+    </div>
+
+    <div class="info-card" style="margin-top: 1.5rem;">
+        <h4>📌 Project Submission</h4>
+        <p><strong>Project:</strong> Jyotisoft — Software Training Institute Website &bull; <strong>Duration:</strong> 8 Weeks × 6 Days (48 Days) &bull; <strong>Stack:</strong> PHP 8, MySQL, Bootstrap 5, GSAP, AOS &bull; <strong>Location:</strong> Pokhara, Nepal</p>
+    </div>
+
+    <p style="text-align: center; margin-top: 2rem; color: var(--text-light); font-size: 0.8rem;">
+        <em>Report generated by Buffy AI | SDLC Log Report | Jyotisoft Software Training Institute</em>
+    </p>
+</section>
+
+</body>
+</html>

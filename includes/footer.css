@@ -1,0 +1,135 @@
+/* ====================================
+   JYOTISOFT PREMIUM FOOTER
+==================================== */
+
+footer {
+    position: relative;
+    background:
+        linear-gradient(
+            135deg,
+            #07111f 0%,
+            #0b1628 50%,
+            #07111f 100%
+        );
+    color: #e2e8f0;
+    overflow: hidden;
+}
+
+/* Top Accent Line */
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        #00b85c,
+        #00aeef,
+        #b026c4,
+        #ff6b35
+    );
+}
+
+.footer-logo {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+.footer-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.footer-description {
+    color: #94a3b8;
+    line-height: 1.8;
+}
+
+.footer-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    border-radius: 20px;
+    background: linear-gradient(
+        90deg,
+        #00b85c,
+        #b026c4
+    );
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+.footer-links a:hover {
+    color: #00b85c;
+    padding-left: 8px;
+}
+
+.footer-contact p {
+    color: #cbd5e1;
+    margin-bottom: 12px;
+}
+
+.footer-contact i {
+    width: 25px;
+    color: #00b85c;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.05);
+    color: #fff;
+    transition: .3s;
+}
+
+.social-links a:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(
+        135deg,
+        #00b85c,
+        #b026c4
+    );
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+.footer-bottom small {
+    color: #94a3b8;
+}
